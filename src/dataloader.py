@@ -2,17 +2,6 @@ import pandas as pd
 import dspy
 
 
-def load_data(file_path):
-    data = pd.read_csv(file_path)
-    print(data.columns)
-    data = data.drop(
-        columns=["County", "Health level", "LLAMA", "GEMINI", "GPT4.0", "DDX SNOMED"],
-        axis=1,
-    )
-    dataset = data.to_dict(orient="records")
-    return dataset
-
-
 class PredictionModel(dspy.Signature):
     master_index: str = dspy.InputField(desc="Master Index")
     prompt: str = dspy.InputField(desc="Input Prompt from Nurse")
@@ -21,21 +10,42 @@ class PredictionModel(dspy.Signature):
     clinician: str = dspy.OutputField(desc="Clinician Summary")
 
 
-summary_generator = dspy.ChainOfThought(PredictionModel)
-dataset = load_data("data/train.csv")
+class DataLoader:
+    def __init__(self, file_path):
+        self.file_path = file_path
 
-train_data = dataset[: int(len(dataset) * 0.25)]
-test_data = dataset[int(len(dataset) * 0.25) :]
+    def load_data(self):
+        data = pd.read_csv(self.file_path)
+        data = data.drop(
+            columns=[
+                "County",
+                "Health level",
+                "LLAMA",
+                "GEMINI",
+                "GPT4.0",
+                "DDX SNOMED",
+            ],
+            axis=1,
+        )
+        dataset = data.to_dict(orient="records")
+        return dataset
 
-train_set = [
-    dspy.Example(PredictionModel, **data).with_inputs(
-        "Master_Index", "Prompt", "Nursing Competency", "Clinical Panel"
-    )
-    for data in train_data
-]
-test_set = [
-    dspy.Example(PredictionModel, **data).with_inputs(
-        "Master_Index", "Prompt", "Nursing Competency", "Clinical Panel"
-    )
-    for data in test_data
-]
+    def split_data(self, dataset, split_ratio=0.25):
+        train_data = dataset[: int(len(dataset) * split_ratio)]
+        test_data = dataset[int(len(dataset) * split_ratio) :]
+        return train_data, test_data
+
+    def create_examples(self, data):
+        return [
+            dspy.Example(PredictionModel, **data).with_inputs(
+                "Master_Index", "Prompt", "Nursing Competency", "Clinical Panel"
+            )
+            for data in data
+        ]
+
+    def get_data(self):
+        dataset = self.load_data()
+        train_data, test_data = self.split_data(dataset)
+        train_set = self.create_examples(train_data)
+        test_set = self.create_examples(test_data)
+        return train_set, test_set

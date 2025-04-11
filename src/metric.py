@@ -17,8 +17,4 @@ def rouge_metric(predictions, ground_truth):
     # Calculate the scores
     scores = scorer.score(ground_truth, predictions)
 
-    return (
-        scores["rougeL"].precision,
-        scores["rougeL"].recall,
-        scores["rougeL"].fmeasure,
-    )
+    return scores["rougeL"].recall
