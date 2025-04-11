@@ -1,4 +1,5 @@
 from rouge_score import rouge_scorer
+import dspy
 
 
 def rouge_metric(predictions, ground_truth):
@@ -17,4 +18,16 @@ def rouge_metric(predictions, ground_truth):
     # Calculate the scores
     scores = scorer.score(ground_truth, predictions)
 
-    return scores["rougeL"].recall
+    return (
+        scores["rougeL"].recall,
+        scores["rougeL"].precision,
+        scores["rougeL"].fmeasure,
+    )
+
+
+def dspy_rouge(example: dspy.Example, prediction: dspy.ChainOfThought):
+    precision, recall, fmeasure = rouge_metric(prediction.Clinician, example.Clinician)
+    if recall > 0.9 and precision > 0.9:
+        return True
+    else:
+        return False

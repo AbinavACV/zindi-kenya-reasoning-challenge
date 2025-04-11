@@ -3,11 +3,8 @@ import dspy
 
 
 class PredictionModel(dspy.Signature):
-    master_index: str = dspy.InputField(desc="Master Index")
-    prompt: str = dspy.InputField(desc="Input Prompt from Nurse")
-    nursing_competency: str = dspy.InputField(desc="Nursing Competency")
-    clinical_panel: str = dspy.InputField(desc="Clinical Panel")
-    clinician: str = dspy.OutputField(desc="Clinician Summary")
+    Prompt: str = dspy.InputField(desc="Input Prompt from Nurse")
+    Clinician: str = dspy.OutputField(desc="Clinician Summary")
 
 
 class DataLoader:
@@ -16,6 +13,7 @@ class DataLoader:
 
     def load_data(self):
         data = pd.read_csv(self.file_path)
+        print(data.columns)
         data = data.drop(
             columns=[
                 "County",
@@ -24,6 +22,10 @@ class DataLoader:
                 "GEMINI",
                 "GPT4.0",
                 "DDX SNOMED",
+                "Master_Index",
+                "Years of Experience",
+                "Nursing Competency",
+                "Clinical Panel",
             ],
             axis=1,
         )
@@ -37,10 +39,7 @@ class DataLoader:
 
     def create_examples(self, data):
         return [
-            dspy.Example(PredictionModel, **data).with_inputs(
-                "Master_Index", "Prompt", "Nursing Competency", "Clinical Panel"
-            )
-            for data in data
+            dspy.Example(PredictionModel, **data).with_inputs("Prompt") for data in data
         ]
 
     def get_data(self):

@@ -1,6 +1,6 @@
 import dspy
-from src.metric import rouge_metric
-from src.dataloader import train_set, test_set
+from src.metric import dspy_rouge
+from src.dataloader import DataLoader
 from src.dataloader import PredictionModel
 
 lm = dspy.LM(
@@ -8,26 +8,29 @@ lm = dspy.LM(
 )
 dspy.configure(lm=lm)
 
+train_set, test_set = DataLoader("data/train.csv").get_data()
 summary_generator = dspy.ChainOfThought(PredictionModel)
 
-evaluate_correctness = dspy.Evaluate(
+# print(test_set[0])
+evaluate = dspy.Evaluate(
     devset=test_set,
-    metric=rouge_metric,
+    metric=dspy_rouge,
     num_threads=4,
     display_progress=True,
     display_table=True,
 )
 
 mipro_optimizer = dspy.MIPROv2(
-    metric=rouge_metric,
+    metric=dspy_rouge,
     auto="medium",
 )
-optimized_summary = mipro_optimizer.compile(
-    summary_generator,
-    trainset=train_set,
-    max_bootstrapped_demos=1,
-    requires_permission_to_run=False,
-    minibatch=False,
-)
-evaluate_correctness(summary_generator, devset=test_set)
-optimized_summary.save("challenge_prompt_v1.json")
+
+# optimized_summary = mipro_optimizer.compile(
+#     summary_generator,
+#     trainset=train_set,
+#     max_bootstrapped_demos=1,
+#     requires_permission_to_run=False,
+#     minibatch=False,
+# )
+# evaluate(summary_generator, devset=test_set)
+# optimized_summary.save("challenge_prompt_v1.json")
