@@ -33,4 +33,4 @@ optimized_summary = mipro_optimizer.compile(
     minibatch=False,
 )
 evaluate(summary_generator, devset=test_set)
-optimized_summary.save("challenge_prompt_v1.json")
+optimized_summary.save("prompts/challenge_prompt_v1.json")
