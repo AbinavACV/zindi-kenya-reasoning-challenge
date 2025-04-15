@@ -32,7 +32,7 @@ class DataLoader:
         dataset = data.to_dict(orient="records")
         return dataset
 
-    def split_data(self, dataset, split_ratio=0.25):
+    def split_data(self, dataset, split_ratio=0.2):
         train_data = dataset[: int(len(dataset) * split_ratio)]
         test_data = dataset[int(len(dataset) * split_ratio) :]
         return train_data, test_data

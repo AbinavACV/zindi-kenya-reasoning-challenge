@@ -25,7 +25,9 @@ def rouge_metric(predictions, ground_truth):
     )
 
 
-def dspy_rouge(example: dspy.Example, prediction: dspy.ChainOfThought):
+def dspy_rouge(
+    example: dspy.Example, prediction: dspy.ChainOfThought, trace=None
+) -> bool:
     precision, recall, fmeasure = rouge_metric(prediction.Clinician, example.Clinician)
     if recall > 0.9 and precision > 0.9:
         return True
