@@ -3,9 +3,7 @@ from src.metric import dspy_rouge
 from src.dataloader import DataLoader
 from src.dataloader import PredictionModel
 
-lm = dspy.LM(
-    "ollama_chat/phi4-mini:latest", api_base="http://localhost:11434", api_key=""
-)
+lm = dspy.LM("ollama_chat/smollm:360m", api_base="http://localhost:11434", api_key="")
 dspy.configure(lm=lm)
 
 train_set, test_set = DataLoader("data/train.csv").get_data()
@@ -28,7 +26,7 @@ mipro_optimizer = dspy.MIPROv2(
 optimized_summary = mipro_optimizer.compile(
     summary_generator,
     trainset=train_set,
-    max_bootstrapped_demos=1,
+    max_bootstrapped_demos=4,
     requires_permission_to_run=False,
     minibatch=False,
 )

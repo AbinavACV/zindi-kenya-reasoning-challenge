@@ -1,0 +1,57 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 16 years of experience in general nursing working in a national referral hospitals in uasin gishu county in kenya a 22 year old female patient is brought in with complaints of headache dizziness weakness and vomiting the patient also has confusion she was using a charcoal jiko to cook in a poorly ventilated room before developing the above symptoms she is pale and disoriented gcs 14 15 temperature 36 2 c pulse 112bpm respirations 26 minute spo2 80 on room air bp 142 92 mmhg questions how do i manage the patient what investigations do i need to carry out why is the patient confused",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 22 year old female patient is brought in complaining of headache dizziness weakness and vomiting with confusion she was using charcoal to cook in a poorly ventilated room before developing the above symptoms she is pale and disoriented gcs 14 15 temperature 36 2 c pulse 112bpm respirations 26 minute spo2 80 on room air bp 142 92 mmhg questions how do i manage the patient what investigations do I need to carry out why is the patient confused"
+      },
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 12 years of experience in general nursing working in a sub county hospitals and nursing homes in kiambu county in kenya a 40 year old para 3 0 gravida 4 mother at a gestation of 38 weeks comes for the second antenatal clinic she is already in the intensive phase of anti tb medication how do i manage the baby after delivery and what precautions should the mother take to ensure the baby is not infected",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 40 year old para-3 0 gravida 4 mother at a gestation of 38 weeks comes for the second antenatal clinic she is already in the intensive phase of anti TB medication how do I manage the baby after delivery and what precautions should the mother take to ensure the baby is not infected"
+      },
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 20 years of experience in general nursing working in a national referral hospitals in uasin gishu county in kenya a 33year old male client complains of pain in the teeth broken teeth swelling and bleeding he had been involved in a motorbike accident today on examination had lost some teeth obvious lacerations on the gums b p 100 52mmhg p 89 m t 36 question what is the priority management of the patient",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 20 year old male client complains of pain in the teeth broken teeth swelling and bleeding he had been involved in a motorbike accident today on examination had lost some teeth obvious lacerations on the gums b p 100 52mmhg p 89 m t 36 question what is the priority management of the patient?"
+      },
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse working in a national referral hospitals in uasin gishu county in kenya a 10 year old boy presented with a lump fever and limited range of motion in his left hip after a minor trauma x rays of the pelvis and left hip revealed a lytic lesion t 38 bp 110 60 mmhg p 100 b m r 26 b m what laboratory investigation can be done what is the diagnosis what s the management",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 10 year old boy presented with a lump fever and limited range of motion in his left hip after a minor trauma x rays of the pelvis and left hip revealed a lytic lesion t 38 bp 110 60 mmhg p 100 b m r 26 b m what laboratory investigation can be done what is the diagnosis what s the management"
+      }
+    ],
+    "signature": {
+      "instructions": "{prompt} -> reasoning, Clinician",
+      "fields": [
+        {
+          "prefix": "Prompt:",
+          "description": "Input Prompt from Nurse"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Clinician:",
+          "description": "Clinician Summary"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "2.6.17",
+      "cloudpickle": "3.1"
+    }
+  }
+}
