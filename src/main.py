@@ -3,7 +3,11 @@ from src.metric import dspy_rouge
 from src.dataloader import DataLoader
 from src.dataloader import PredictionModel
 
-lm = dspy.LM("ollama_chat/smollm:360m", api_base="http://localhost:11434", api_key="")
+lm = dspy.LM(
+    "openai/EXTERNAL:google/gemini-2.0-flash-lite-001",
+    api_base="https://llm-gateway.internal.latest.acvauctions.com/openai/v1",
+    api_key="xxx",
+)
 dspy.configure(lm=lm)
 
 train_set, test_set = DataLoader("data/train.csv").get_data()
@@ -23,12 +27,23 @@ mipro_optimizer = dspy.MIPROv2(
     auto="medium",
 )
 
-optimized_summary = mipro_optimizer.compile(
+copro_optimizer = dspy.COPRO(metric=dspy_rouge, init_temperature=0.1)
+
+mipro_optimized_summary = mipro_optimizer.compile(
     summary_generator,
     trainset=train_set,
     max_bootstrapped_demos=4,
     requires_permission_to_run=False,
     minibatch=False,
 )
+
+# copro_optimized_summary = copro_optimizer.compile(
+#     summary_generator,
+#     trainset=train_set,
+#     eval_kwargs= {}
+# )
+
+
 evaluate(summary_generator, devset=test_set)
-optimized_summary.save("prompts/challenge_prompt_v1.json")
+mipro_optimized_summary.save("prompts/challenge_mipro_prompt_v1.json")
+# copro_optimized_summary.save("prompts/challenge_copro_prompt_v1.json")

@@ -1,0 +1,51 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 8 years of experience in general nursing working in a sub county hospitals and nursing homes in kakamega county in kenya a patient with burns over the chest and face present in casualty the patient develops difficulty in breathing while at the department vital signs are within normal range except the spo2 which is 89 of oxygen and respiration that is 24 breaths per minute why is the patient having difficulty in breathing what is the appropriate position for this patient should i de blister the patient",
+        "reasoning": "The patient's difficulty breathing, despite normal vital signs except for slightly low SpO2 and elevated respiratory rate, suggests potential airway compromise or respiratory distress secondary to the burns. The burns to the face and chest are concerning for inhalation injury and\/or chest wall restriction.",
+        "Clinician": "summary patient with burns to chest and face develops difficulty breathing spo2 89% rr 24 breaths\/min\n\nwhy difficulty in breathing airway compromise from inhalation injury smoke inhalation edema of the airway chest wall restriction from burn eschar.\n\nappropriate position for patient high fowlers position to optimize breathing.\n\nshould i de blister the patient no do not de-glove blisters this is because blisters are natural barriers from secondary infection it can be burst and dressed with sterile dressing\n."
+      },
+      {
+        "Prompt": "i am a nurse with 18 years of experience in general nursing working in a sub county hospitals and nursing homes in uasin gishu county in kenya a 4 year old child presents to the emergency department with second degree burns on the forearm after accidentally touching a hot stove the child was playing in the kitchen when they reached out to touch the stove the burns cover about 5 of the total body surface area the child is alert and crying with redness blisters and swelling on the affected area the burns appear to be superficial to moderate in severity the child is in mild pain and there is no indication of airway or breathing distress no other injuries are noted questions 1 what is the immediate treatment protocol for second degree burns in paediatric patients 2 should any tetanus prophylaxis be considered in this case 3 what follow up care should be recommended for burn healing",
+        "Clinician": "summary a 4 year old with 5 superficial burns no other injuries immediate management paracetamol analgesics to to ensure child has minimal or no pain cleaning and frosting of wound with silver sulpha fizika topical prophylactic can be considered in this case good nutrition high protein diet"
+      },
+      {
+        "Prompt": "i am a nurse with 20 years of experience in general nursing and primary care working in a health centres in uasin gishu county in kenya during a mobile vct clinic of hiv aids a man aged 16 years came for counselling the boy has been born with hiv aids after being transmitted by his mother he looked quite disturbed and unhappy he has been on arvs throughout his life during counselling he said he had gone through stigma from school neighbors and relatives nobody wanted to be associated with him in class nobody wanted to share a pen or desk with him he feels like committing suicide vital signs bp 120 70 mmhg p 82 b min t 36 2 oc spo2 99 r 16 b min differential diagnosis stigma depression recommendation enhanced counselling to the boy parents and teachers referral to a psychologist for further management questions how can stigma be reduced controlled for clients with hiv aids how can sensitization be increased at community level against stigma",
+        "Clinician": "16 yr old with hiv experiencing stigma and is now suicidal vitals stable 1 diagnosis hiv associated depressive disorder differential major depressive disorder x0001 x0001 bipolar disorder depressive episode 2 how can stigma be reduced controlled a client patient level extensive psychological counselling group therapy meditation b community based public awareness forums focussed group discussions health campaigns social media campaigns"
+      },
+      {
+        "Prompt": "i am a nurse with 12 years of experience in general nursing working in a sub county hospitals and nursing homes in kiambu county in kenya forty seven years old man came to casualty supported by two men screaming because of pain upon inquiry he reported that he had severe abdominal pain upper abdominal pain in the gastric area which had started the previous night he had not slept he also reported that this was not the first time that it was happening and he reported a history of pud this time it was severe so on observations the puds were the vitals were within normal range the questions i had were an analgesic first or this patient was sent for labs or to do a scan first",
+        "Clinician": "summary a 47 year old man presents with severe persistent upper abdominal pain in the gastric area that started the previous night he has a history of peptic ulcer disease vitals are normal patient is in distress problems severe pain history of peptic ulcer disease distress and inability to sleep management administer analgesia for the pain start iv fluids to correct possible volume depletion administer proton pump inhibitor for the gastrointestinal upset administer antibiotics if there are signs of peritonitis investigations complete blood counts to check for leukocytosis ultrasound do an erect abdominal x ray to look for air under the diaphragm provisional diagnosis pdx acute exacerbation of peptic ulcer disease"
+      }
+    ],
+    "signature": {
+      "instructions": "Based on the provided `Prompt` (nurse's report), generate the `Clinician` output, which summarizes the patient's condition and suggests immediate management steps. Include a step-by-step `Reasoning` for the clinician summary.",
+      "fields": [
+        {
+          "prefix": "Prompt:",
+          "description": "Input Prompt from Nurse"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Clinician:",
+          "description": "Clinician Summary"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "2.6.17",
+      "cloudpickle": "3.1"
+    }
+  }
+}

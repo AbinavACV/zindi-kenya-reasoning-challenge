@@ -1,6 +1,7 @@
 import dspy
 import pandas as pd
 from src.dataloader import PredictionModel
+# from src.lm import MySelfHostedLM
 
 
 def load_csv(file_path: str):
@@ -21,9 +22,24 @@ def perform_inference(loaded_prompt, language_model: str, input_string: str):
     return output
 
 
+def perform_inference_with_llm_gateway(
+    loaded_prompt, language_model: str, input_string: str
+):
+    # lm = MySelfHostedLM(model_kwargs={"max_tokens": 3000})
+    lm = dspy.LM(
+        language_model,
+        api_base="https://llm-gateway.internal.latest.acvauctions.com/openai/v1",
+        api_key="xxx",
+    )
+    dspy.configure(lm=lm)
+    output = loaded_prompt(Prompt=input_string)
+    return output
+
+
 if __name__ == "__main__":
-    language_model = "ollama_chat/smollm:360m"
-    saved_prompt_path = "/Users/abinav/Desktop/repos/competitions/zindi-kenya-reasoning-challenge/prompts/challenge_prompt_smollm_v1.json"
+    # language_model = "ollama_chat/smollm2:135m"
+    language_model = "openai/EXTERNAL:google/gemini-2.0-flash-lite-001"
+    saved_prompt_path = "/Users/abinav/Desktop/repos/competitions/zindi-kenya-reasoning-challenge/prompts/challenge_mipro_prompt_v1.json"
 
     class PredictionModel(dspy.Signature):
         Prompt: str = dspy.InputField(desc="Input Prompt from Nurse")
@@ -37,9 +53,12 @@ if __name__ == "__main__":
     output_dict = {}
     final_list = []
     for idx, input_string in data:
-        output = perform_inference(generator, language_model, input_string)
+        # output = perform_inference(generator, language_model, input_string)
+        output = perform_inference_with_llm_gateway(
+            generator, language_model, input_string
+        )
         output_dict["Master_Index"] = idx
         output_dict["Clinician"] = output.Clinician
         final_list.append(output_dict.copy())
     # print(final_list)
-    pd.DataFrame(final_list).to_csv("data/submission.csv", index=False)
+    pd.DataFrame(final_list).to_csv("data/submission_test_mipro.csv", index=False)

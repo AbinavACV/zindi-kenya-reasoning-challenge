@@ -1,0 +1,57 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 17 years of experience in general nursing working in a national referral hospitals in uasin gishu county in kenya a 6 year old girl presented to the emergency department with complaints of vomiting and abdominal pains patient is known diabetic on insulin and does not take as scheduled because of lack of funds on assessment the girl is confused having kussmaul breathing and fruity scented breath has dry tongue and reports blurred vision temp 37 pulse 120b m resp 48b m rapid and labored spo2 90 on room air questions what is the diagnosis of the patient what is the most immediate management what health education will be given to the patient and family which investigations will be ordered",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 6 year old girl with diabetic symptoms and no insulin on medication, does not take as scheduled due to lack of funds on assessment patient is known diabetic on insulin and does not take as scheduled because of lack of funds on assessment the patient is confused having kussmaul breathing and fruity scent breath has dry tongue and reports blurred vision temp 37 pulse 120b m resp 48 b m rapid and labored spo2 90 on room air questions what is the diagnosis of the patient what is the most immediate management what health education will be given to the patient and family which investigations will be ordered"
+      },
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 12 years of experience in general nursing working in a sub county hospitals and nursing homes in kiambu county in kenya forty seven years old man came to casualty supported by two men screaming because of pain upon inquiry he reported that he had severe abdominal pain upper abdominal pain in the gastric area which had started the previous night he had not slept he also reported that this was not the first time that it was happening and he reported a history of pud this time it was severe so on observations the puds were the vitals were within normal range the questions i had were an analgesic first or this patient was sent for labs or to do a scan first",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 47 year old man came to casualty supported by two men screaming because of pain upon inquiry he reported that he had severe abdominal pain upper abdominal pain in the gastric area which had started the previous night and was severe so on observations the puds were the vitals were within normal range the questions i had were an analgesic first or this patient was sent for labs or to do a scan first"
+      },
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 16 years of experience in general nursing working in a national referral hospitals in uasin gishu county in kenya a 22 year old female patient is brought in with complaints of headache dizziness weakness and vomiting the patient also has confusion she was using a charcoal jiko to cook in a poorly ventilated room before developing the above symptoms she is pale and disoriented gcs 14 15 temperature 36 2 c pulse 112bpm respirations 26 minute spo2 80 on room air bp 142 92 mmhg questions how do i manage the patient what investigations do i need to carry out why is the patient confused",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 22 year old female patient is brought in with complaints of headache dizziness weakness and vomiting the patient also has confusion she was using a charcoal jiko to cook in a poorly ventilated room before developing the above symptoms she is pale and disoriented gcs 14 15 temperature 36 2 c pulse 112bpm respirations 26 minute spo\u2082 97 on room air bp 142 92 mmhg questions how do i manage the patient what investigations do I need to carry out why is the patient confused"
+      },
+      {
+        "augmented": true,
+        "Prompt": "i am a nurse with 12 years of experience in general nursing working in a sub county hospitals and nursing homes in kiambu county in kenya a 40 year old para 3 0 gravida 4 mother at a gestation of 38 weeks comes for the second antenatal clinic she is already in the intensive phase of anti tb medication how do i manage the baby after delivery and what precautions should the mother take to ensure the baby is not infected",
+        "reasoning": "Not supplied for this particular example. ",
+        "Clinician": "summary a 40 year old para 3 0 gravida 4 mother at a gestation of 38 weeks comes for the second antenatal clinic she is already in the intensive phase of anti tb medication how do i manage the baby after delivery and what precautions should the mother take to ensure the baby is not infected"
+      }
+    ],
+    "signature": {
+      "instructions": "[**Basic Instruction**](#basic-instructions)**",
+      "fields": [
+        {
+          "prefix": "Prompt:",
+          "description": "Input Prompt from Nurse"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Clinician:",
+          "description": "Clinician Summary"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "2.6.17",
+      "cloudpickle": "3.1"
+    }
+  }
+}
